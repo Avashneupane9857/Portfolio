@@ -9,6 +9,7 @@ import Target from "../components/Target";
 import ReactLogo from "../components/ReactLogo";
 import DockerLogo from "../components/DockerLogo";
 import Rings from "../components/Rings";
+import Button from "../components/Button";
 
 function Hero() {
   //   const controls = useControls("HackerRoom", {
@@ -57,6 +58,15 @@ function Hero() {
           <ambientLight intensity={1} />
           <directionalLight position={[10, 10, 10]} intensity={0.5} />
         </Canvas>
+      </div>
+      <div className=" c-space absolute bottom-1 left-0 right-0 z-10">
+        <a href="#contact" className="">
+          <Button
+            name="Let's work together"
+            isBeam
+            containerClass="sm:w-fit w-full sm:min-w-96"
+          />
+        </a>
       </div>
     </section>
   );

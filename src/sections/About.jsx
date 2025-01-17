@@ -15,23 +15,23 @@ function About() {
 
   return (
     <section className="c-space relative top-6">
-      <div className="flex  gap-6">
+      <div className="flex  gap-20">
         <div className=" w-[400px] bg-zinc-900 rounded-lg overflow-hidden">
           <img
             src="/assets/grid1.jpeg"
             alt="Profile"
-            className="w-full h-[400px] object-cover"
+            className="w-full h-[350px] object-cover"
           />
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-white mb-2">Hi I'm Avash</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">Hillloo </h2>
             <p className="text-gray-300">
-              With 1 year of experience, I have honed my skills in frontend,
-              UI/UX and CI/CD
+              With years of experience, I have honed my skills in Fullstack,
+              UI/UX and DevOps
             </p>
           </div>
         </div>
 
-        <div className="flex-1 h-[300px]  flex flex-col gap-6">
+        <div className="flex-1 h-[300px] relative top-20  flex flex-col gap-6">
           <div className="flex-1 w-[400px]  bg-zinc-900 rounded-lg p-6">
             <div>
               <h2 className="text-2xl font-bold text-white mb-2">

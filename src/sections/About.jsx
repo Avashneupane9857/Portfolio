@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
+import { ContactModal } from "../components/WorkTogether";
 
 function About() {
   const [hasCopied, setHasCopied] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleCopy = () => {
     navigator.clipboard.writeText("reevasnp123@gmail.com");
     setHasCopied(true);
@@ -14,9 +15,8 @@ function About() {
 
   return (
     <section className="c-space relative top-6">
-      <div className="flex flex-wrap gap-6">
-        {/* Introduction Card - Larger size */}
-        <div className="w-[60%] min-w-[400px] bg-zinc-900 rounded-lg overflow-hidden">
+      <div className="flex  gap-6">
+        <div className=" w-[400px] bg-zinc-900 rounded-lg overflow-hidden">
           <img
             src="/assets/grid1.jpeg"
             alt="Profile"
@@ -31,9 +31,8 @@ function About() {
           </div>
         </div>
 
-        <div className="flex-1 min-w-[300px] flex flex-col gap-6">
-       
-          <div className="flex-1 bg-zinc-900 rounded-lg p-6">
+        <div className="flex-1 h-[300px]  flex flex-col gap-6">
+          <div className="flex-1 w-[400px]  bg-zinc-900 rounded-lg p-6">
             <div>
               <h2 className="text-2xl font-bold text-white mb-2">
                 I work remotely across most timezones
@@ -41,7 +40,17 @@ function About() {
               <p className="text-gray-300 mb-6">
                 I'm based in Nepal with remote work available
               </p>
-              <Button name="Contact me" isBeam containerClass="w-full mt-4" />
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsModalOpen(true);
+                }}
+              >
+                {" "}
+                <Button name="Contact me" isBeam containerClass="w-full mt-4" />
+              </a>
+
               <div
                 className="flex items-center justify-center relative top-5 gap-3 p-3 bg-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-700 transition-colors duration-200"
                 onClick={handleCopy}
@@ -59,6 +68,10 @@ function About() {
           </div>
         </div>
       </div>
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }

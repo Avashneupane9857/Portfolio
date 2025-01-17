@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import Button from "./Button";
 
 // Modal Component
-const ContactModal = ({ isOpen, onClose }) => {
+export const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",

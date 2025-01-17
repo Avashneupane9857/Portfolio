@@ -1,8 +1,9 @@
-import Globe from "react-globe.gl";
+import React, { useState } from "react";
 import Button from "../components/Button";
-import { useState } from "react";
+
 function About() {
   const [hasCopied, setHasCopied] = useState(false);
+
   const handleCopy = () => {
     navigator.clipboard.writeText("reevasnp123@gmail.com");
     setHasCopied(true);
@@ -10,93 +11,47 @@ function About() {
       setHasCopied(false);
     }, 2000);
   };
+
   return (
-    <section className="c-space my-20">
-      <div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full">
-        <div className="col-span-1 xl:row-span-3">
-          <div className="grid-container">
-            <img
-              src="/assets/grid1.png"
-              alt=""
-              className="w-full sm:h-[276px] h-fit object-contain"
-            />
-            <div>
-              <p className="grid-headttext text-white"> Hi I'm Avash</p>
-              <p className="grid-subtext">
-                With 1 year of experience , I have honed my skills in frontend ,
-                UI/UX and CI/CD
-              </p>
-            </div>
+    <section className="c-space relative top-6">
+      <div className="flex flex-wrap gap-6">
+        {/* Introduction Card - Larger size */}
+        <div className="w-[60%] min-w-[400px] bg-zinc-900 rounded-lg overflow-hidden">
+          <img
+            src="/assets/grid1.jpeg"
+            alt="Profile"
+            className="w-full h-[400px] object-cover"
+          />
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-white mb-2">Hi I'm Avash</h2>
+            <p className="text-gray-300">
+              With 1 year of experience, I have honed my skills in frontend,
+              UI/UX and CI/CD
+            </p>
           </div>
         </div>
-        <div className="col-span-1 xl:row-span-3">
-          <div className="grid-container">
-            <img
-              src="/assets/grid2.png"
-              alt=""
-              className="w-full sm:w-[300px] h-fit object-contain"
-            />
+
+        <div className="flex-1 min-w-[300px] flex flex-col gap-6">
+       
+          <div className="flex-1 bg-zinc-900 rounded-lg p-6">
             <div>
-              <p className="grid-headtext">Tech Stack</p>
-              <p className="grid-subtext">
-                I specialize in React ,Next and CICD
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="col-span-1 xl:row-span-4">
-          <div className="grid-container">
-            <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
-              <Globe
-                height={326}
-                width={326}
-                backgroundColor="rgba(0,0,0,0)"
-                backgroundImageOpacity={0.5}
-                showAtmosphere
-                showGraticules
-                globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-                bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-              />
-            </div>
-            <div>
-              <p className="grid-headtext">
+              <h2 className="text-2xl font-bold text-white mb-2">
                 I work remotely across most timezones
-              </p>
-              <p className="grid-subtext">
+              </h2>
+              <p className="text-gray-300 mb-6">
                 I'm based in Nepal with remote work available
               </p>
-              <Button name="Contact me" isBeam containerClass="w-full mt-10" />
-            </div>
-          </div>
-        </div>
-        <div className="xl:col-span-2 xl:row-span-3">
-          <div className="grid-container">
-            <img
-              src="/assets/grid3.png"
-              alt=""
-              className="w-full sm:h-[266px] h-fit object-contain"
-            />
-            <div>
-              <p className="grid-headtext">My passion for coding</p>
-              <p className="grid-subtext">I love building things</p>
-            </div>
-          </div>
-        </div>
-        <div className="xl:col-span-1 xl:row-span-2 ">
-          <div className="grid-container">
-            <img
-              src="assets/grid4.png"
-              className="w-full md:h-[126px] sm:h-[276px] h-fit object-cover sm:object-top"
-              alt=""
-            />
-            <div className="space-y-2">
-              <p className="grid-subtext text-center"> Contact Me</p>
-              <div className="copy-container" onClick={handleCopy}>
+              <Button name="Contact me" isBeam containerClass="w-full mt-4" />
+              <div
+                className="flex items-center justify-center relative top-5 gap-3 p-3 bg-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-700 transition-colors duration-200"
+                onClick={handleCopy}
+              >
                 <img
                   src={hasCopied ? "assets/tick.svg" : "assets/copy.svg"}
-                  alt=""
+                  alt={hasCopied ? "Copied" : "Copy"}
+                  className="w-6 h-6"
                 />
-                <p className="lg:text-2xl md:text-xl text-gray_gradient font-medium text-white">
+                <p className="text-xl text-white font-medium">
                   reevasnp123@gmail.com
                 </p>
               </div>

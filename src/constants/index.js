@@ -35,16 +35,16 @@ export const calculateSizes = (isSmall, isMobile, isTablet) => {
 
 export const projects = [
   {
-    name: "SajiloDev",
+    name: "Rental Mania",
     description:
-      "A web platform built with React TypeScript and Firebase for ordering technical services such as website creation, domain checks, hosting, and maintenance. It provides a user-friendly interface for managing these services efficiently.",
+      "A web-based Airbnb-like platform connects hosts and guests for short-term rentals, featuring property listings, secure bookings, real-time availability, user dashboards, reviews, and integrated payments for seamless accommodation management.",
     tags: [
       {
         name: "react",
         color: "blue-text-gradient",
       },
       {
-        name: "firebase",
+        name: "express",
         color: "orange-text-gradient",
       },
       {
@@ -56,37 +56,8 @@ export const projects = [
         color: "green-text-gradient",
       },
     ],
-    image: "",
-    source_code_link: "https://github.com/dipenbhat557/SajiloDev",
-    website_link: "https://sajilodev.com",
-    figma_link: "https://figma.com/your-figma-link",
-  },
-  {
-    name: "Test",
-    description:
-      "A web platform built with React TypeScript and Firebase for ordering technical services such as website creation, domain checks, hosting, and maintenance. It provides a user-friendly interface for managing these services efficiently.",
-    tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "firebase",
-        color: "orange-text-gradient",
-      },
-      {
-        name: "tailwindcss",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "typescript",
-        color: "green-text-gradient",
-      },
-    ],
-    image: "",
-    source_code_link: "https://github.com/dipenbhat557/SajiloDev",
-    website_link: "https://sajilodev.com",
-    figma_link: "https://figma.com/your-figma-link",
+    image: "/assets/rentalmania.png",
+    source_code_link: "https://github.com/Avashneupane9857/Rental-Mania",
   },
   {
     name: "SajiloDev",
@@ -110,12 +81,14 @@ export const projects = [
         color: "green-text-gradient",
       },
     ],
-    image: "",
-    source_code_link: "https://github.com/dipenbhat557/SajiloDev",
+    image: "/assets/sajilodev.png",
+    source_code_link: "https://github.com/Avashneupane9857/Sajilodev",
     website_link: "https://sajilodev.com",
+    figma_link:
+      "https://www.figma.com/design/4BHHJyE26ckdxfE9AKmeiE/sajiloDev?node-id=0-1&t=bhNXBxYVfsbA7XHU-1",
   },
   {
-    name: "SajiloDev",
+    name: "CryptoNest",
     description:
       "A web platform built with React TypeScript and Firebase for ordering technical services such as website creation, domain checks, hosting, and maintenance. It provides a user-friendly interface for managing these services efficiently.",
     tags: [
@@ -123,10 +96,7 @@ export const projects = [
         name: "react",
         color: "blue-text-gradient",
       },
-      {
-        name: "firebase",
-        color: "orange-text-gradient",
-      },
+
       {
         name: "tailwindcss",
         color: "pink-text-gradient",
@@ -135,9 +105,45 @@ export const projects = [
         name: "typescript",
         color: "green-text-gradient",
       },
+
+      {
+        name: "@solana/web3.js",
+        color: "orange-text-gradient",
+      },
     ],
-    image: "",
-    source_code_link: "https://github.com/dipenbhat557/SajiloDev",
-    website_link: "https://sajilodev.com",
+    image: "/assets/crp.png",
+    source_code_link: "https://github.com/Avashneupane9857/CryptoNest",
+    website_link: "https://crypto-nest-eight.vercel.app/",
+  },
+  {
+    name: "dApp",
+    description:
+      "A decentralized application built with React.js for managing SPL tokens on Solana. The dapp connects to Solana wallets, allowing users to view their token balances and execute secure token transfers with message signing.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+
+      {
+        name: "tailwindcss",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "typescript",
+        color: "green-text-gradient",
+      },
+      {
+        name: "@solana/web3.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "@solana/wallet-adapter",
+        color: "orange-text-gradient",
+      },
+    ],
+    image: "/assets/dApp.png",
+    source_code_link: "https://github.com/Avashneupane9857/dApp",
+    website_link: "https://d-app-opal.vercel.app/",
   },
 ];

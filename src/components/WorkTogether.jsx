@@ -105,29 +105,21 @@ export const ContactModal = ({ isOpen, onClose }) => {
 
 export function WorkTogether() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
-    <div>
-      <div className="    w-full  ">
-        <a
-          href="#contact"
-          onClick={(e) => {
-            e.preventDefault();
-            setIsModalOpen(true);
-          }}
-        >
-          <Button
-            name="Let's work together"
-            isBeam
-            containerClass="sm:w-fit w-full sm:min-w-96"
-          />
-        </a>
-      </div>
-
+    <>
+      <a
+        href="#contact"
+        onClick={(e) => {
+          e.preventDefault();
+          setIsModalOpen(true);
+        }}
+      >
+        <Button name="Let's work together" isBeam containerClass="w-full" />
+      </a>
       <ContactModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-    </div>
+    </>
   );
 }

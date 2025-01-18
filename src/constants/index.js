@@ -1,17 +1,3 @@
-export const navLinks = [
-  {
-    id: 1,
-    name: "Home",
-    href: "#home",
-  },
-
-  {
-    id: 3,
-    name: "Work",
-    href: "#work",
-  },
-];
-
 export const calculateSizes = (isSmall, isMobile, isTablet) => {
   return {
     deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.065,

@@ -18,7 +18,7 @@ function About() {
   };
 
   return (
-    <section className="c-space relative top-6">
+    <section className="c-space relative top-12">
       {!showProjects ? (
         <>
           <div className="flex gap-16">

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import ProjectsBtn from "../components/ProjectsBtn";
-import { ContactModal } from "../components/WorkTogether";
 import ProjectsContainer from "../sections/Projects";
 import MeBtn from "../components/MeBtn";
+import { WorkTogether } from "../components/WorkTogether";
+
 function About() {
   const [hasCopied, setHasCopied] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +21,6 @@ function About() {
   return (
     <section className="c-space relative top-6">
       {!showProjects ? (
-        // About Content
         <>
           <div className="flex gap-16">
             <div className="w-[400px] bg-zinc-900 rounded-lg overflow-hidden">
@@ -53,11 +53,7 @@ function About() {
                       setIsModalOpen(true);
                     }}
                   >
-                    <Button
-                      name="Contact me"
-                      isBeam
-                      containerClass="w-full mt-4"
-                    />
+                    <WorkTogether />
                   </a>
                   <div
                     className="flex items-center justify-center relative top-5 gap-3 p-3 bg-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-700 transition-colors duration-200"
@@ -81,18 +77,13 @@ function About() {
           </div>
         </>
       ) : (
-        // Projects Content
         <div className="relative">
           <ProjectsContainer />
-          <div className="absolute -left-1 top-1/2 transform -translate-y-1/2">
+          <div className="absolute  top-36 -left-32 transform -translate-y-1/2">
             <MeBtn onMeClick={() => setShowProjects(false)} />
           </div>
         </div>
       )}
-      <ContactModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
     </section>
   );
 }

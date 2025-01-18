@@ -111,7 +111,7 @@ const ProjectCard = ({
 
 const ProjectsContainer = () => {
   return (
-    <div className="projects-container">
+    <div className="projects-container ">
       {projects.map((project, index) => (
         <ProjectCard key={`project-${index}`} {...project} />
       ))}

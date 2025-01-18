@@ -100,6 +100,33 @@ export const projects = [
     image: "",
     source_code_link: "https://github.com/dipenbhat557/SajiloDev",
     website_link: "https://sajilodev.com",
+    figma_link: "https://figma.com/your-figma-link",
+  },
+  {
+    name: "SajiloDev",
+    description:
+      "A web platform built with React TypeScript and Firebase for ordering technical services such as website creation, domain checks, hosting, and maintenance. It provides a user-friendly interface for managing these services efficiently.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "firebase",
+        color: "orange-text-gradient",
+      },
+      {
+        name: "tailwindcss",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "typescript",
+        color: "green-text-gradient",
+      },
+    ],
+    image: "",
+    source_code_link: "https://github.com/dipenbhat557/SajiloDev",
+    website_link: "https://sajilodev.com",
   },
   {
     name: "SajiloDev",

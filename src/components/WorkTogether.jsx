@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
 import Button from "./Button";
-
-// Modal Component
-export const ContactModal = ({ isOpen, onClose }) => {
+const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,7 +10,7 @@ export const ContactModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
+
     console.log("Form submitted:", formData);
     onClose();
   };
@@ -105,13 +103,12 @@ export const ContactModal = ({ isOpen, onClose }) => {
   );
 };
 
-// Main Component
-function WorkTogether() {
+export function WorkTogether() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div>
-      <div className="c-space absolute bottom-1 left-0 right-0 z-10">
+      <div className="c-space absolute bottom-1 left-0 right-0 w-full mt-4 z-10">
         <a
           href="#contact"
           onClick={(e) => {
@@ -134,5 +131,3 @@ function WorkTogether() {
     </div>
   );
 }
-
-export default WorkTogether;

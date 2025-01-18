@@ -146,4 +146,63 @@ export const projects = [
     source_code_link: "https://github.com/Avashneupane9857/dApp",
     website_link: "https://d-app-opal.vercel.app/",
   },
+
+  {
+    name: "Geoland Tour and Travel",
+    description:
+      "An application for Geoland Tours and Travel to showcase available tour packages, allowing users to explore, book, and manage their travel plans seamlessly.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+
+      {
+        name: "tailwindcss",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "typescript",
+        color: "green-text-gradient",
+      },
+      {
+        name: "@solana/web3.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "@solana/wallet-adapter",
+        color: "orange-text-gradient",
+      },
+    ],
+    image: "/assets/geo.png",
+    source_code_link: "https://github.com/Avashneupane9857/Geoland-Travels",
+    website_link: "https://geolandtravels.com/",
+    figma_link:
+      "https://www.figma.com/design/3Y9dWCmtxD66Ss1AJ2bpaL/GeoLand-Travels?node-id=0-1&t=34moZx6rHykQKqEP-1",
+  },
+  {
+    name: "DMC ",
+    description:
+      "Deukhuri Multiple Campus is a platform that provides information about our college, its facilities, and events. This website is designed to offer a user-friendly experience and showcase important aspects of our educational institution.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+
+      {
+        name: "tailwindcss",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "typescript",
+        color: "green-text-gradient",
+      },
+    ],
+    image: "/assets/dmc.png",
+    source_code_link: "https://github.com/Avashneupane9857/Deukhuri-College",
+    website_link: "https://deukhurimultiplecampus.edu.np/",
+    figma_link:
+      "https://www.figma.com/design/Bt0QBiat30k8D9giKWTIyk/DMC?node-id=0-1&t=uTjLlesAiLgQaNBD-1",
+  },
 ];

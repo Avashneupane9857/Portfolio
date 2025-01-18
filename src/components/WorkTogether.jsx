@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
 import Button from "./Button";
-const ContactModal = ({ isOpen, onClose }) => {
+export const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -108,7 +108,7 @@ export function WorkTogether() {
 
   return (
     <div>
-      <div className="c-space absolute bottom-1 left-0 right-0 w-full mt-4 z-10">
+      <div className="    w-full  ">
         <a
           href="#contact"
           onClick={(e) => {

@@ -4,6 +4,7 @@ import ProjectsBtn from "../components/ProjectsBtn";
 import ProjectsContainer from "../sections/Projects";
 import MeBtn from "../components/MeBtn";
 import { WorkTogether } from "../components/WorkTogether";
+
 function About() {
   const [hasCopied, setHasCopied] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,67 +21,63 @@ function About() {
   return (
     <section className="c-space relative top-12">
       {!showProjects ? (
-        <>
-          <div className="flex gap-16">
-            <div className="w-[400px] bg-zinc-900 rounded-lg overflow-hidden">
-              <img
-                src="/assets/grid1.jpeg"
-                alt="Profile"
-                className="w-full h-[350px] object-cover"
-              />
-              <div className="p-6">
-                <h2 className="text-2xl font-bold text-white mb-2">Hii, </h2>
-                <p className="text-gray-300">
-                  With years of experience, I have honed my skills in Fullstack,
-                  UI/UX and DevOps
-                </p>
-              </div>
+        <div className="flex flex-col md:flex-row gap-16">
+          <div className="w-full md:w-[400px] bg-zinc-900 rounded-lg overflow-hidden">
+            <img
+              src="/assets/grid1.jpeg"
+              alt="Profile"
+              className="w-full h-[350px] object-cover"
+            />
+            <div className="p-6">
+              <h2 className="text-2xl font-bold text-white mb-2">Hii, </h2>
+              <p className="text-gray-300">
+                With years of experience, I have honed my skills in Fullstack,
+                UI/UX and DevOps
+              </p>
             </div>
-            <div className="flex-1 h-[300px] relative top-20 flex flex-col">
-              <div className="flex-1 w-[400px] bg-zinc-900 rounded-lg p-6">
-                <div className="flex flex-col h-full">
-                  <div>
-                    <h2 className="text-2xl font-bold text-white mb-2">
-                      I work remotely across most timezones
-                    </h2>
-                    <p className="text-gray-300 mb-6">
-                      I'm based in Nepal with remote work available
+          </div>
+          <div className="flex-1 relative top-20 flex flex-col">
+            <div className="w-full md:w-[400px] bg-zinc-900 rounded-lg p-6">
+              <div className="flex flex-col h-full">
+                <div>
+                  <h2 className="text-2xl font-bold text-white mb-2">
+                    I work remotely across most timezones
+                  </h2>
+                  <p className="text-gray-300 mb-6">
+                    I'm based in Nepal with remote work available
+                  </p>
+                </div>
+                <div className="flex flex-col gap-5">
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    <WorkTogether />
+                  </a>
+                  <div
+                    className="flex items-center justify-center gap-3 p-3 bg-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-700 transition-colors duration-200"
+                    onClick={handleCopy}
+                  >
+                    <img
+                      src={hasCopied ? "assets/tick.svg" : "assets/copy.svg"}
+                      alt={hasCopied ? "Copied" : "Copy"}
+                      className="w-6 h-6"
+                    />
+                    <p className="text-xl text-white font-medium">
+                      reevasnp123@gmail.com
                     </p>
-                  </div>
-
-                  <div className="flex flex-col gap-5">
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setIsModalOpen(true);
-                      }}
-                    >
-                      <WorkTogether />
-                    </a>
-
-                    <div
-                      className="flex items-center justify-center gap-3 p-3 bg-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-700 transition-colors duration-200"
-                      onClick={handleCopy}
-                    >
-                      <img
-                        src={hasCopied ? "assets/tick.svg" : "assets/copy.svg"}
-                        alt={hasCopied ? "Copied" : "Copy"}
-                        className="w-6 h-6"
-                      />
-                      <p className="text-xl text-white font-medium">
-                        reevasnp123@gmail.com
-                      </p>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="absolute -right-1 top-1/2 transform -translate-y-1/2">
+            <div className="flex justify-end md:-mt-40 -mt-96 ">
               <ProjectsBtn onProjectsClick={() => setShowProjects(true)} />
             </div>
           </div>
-        </>
+        </div>
       ) : (
         <div className="relative">
           <ProjectsContainer />

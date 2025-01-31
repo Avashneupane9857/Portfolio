@@ -58,19 +58,19 @@ const ProjectCard = ({
   figma_link,
 }) => {
   return (
-    <div className="project-card">
-      <div className="image-container">
+    <div className="project-card bg-zinc-900 rounded-lg overflow-hidden shadow-lg">
+      <div className="relative group">
         <img
           src={image || "/api/placeholder/360/230"}
           alt={name}
-          className="project-image"
+          className="w-full h-48 object-cover"
         />
 
-        <div className="icon-container">
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           {figma_link && (
             <button
               onClick={() => window.open(figma_link, "_blank")}
-              className="icon-button"
+              className="icon-button p-2 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors"
               aria-label="View Figma design"
             >
               <FigmaIcon />
@@ -78,14 +78,14 @@ const ProjectCard = ({
           )}
           <button
             onClick={() => window.open(source_code_link, "_blank")}
-            className="icon-button"
+            className="icon-button p-2 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors"
             aria-label="View source code"
           >
             <GitHubIcon />
           </button>
           <button
             onClick={() => window.open(website_link, "_blank")}
-            className="icon-button"
+            className="icon-button p-2 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors"
             aria-label="Visit website"
           >
             <GlobeIcon />
@@ -93,13 +93,16 @@ const ProjectCard = ({
         </div>
       </div>
 
-      <div className="content">
-        <h3 className="title">{name}</h3>
-        <p className="description">{description}</p>
+      <div className="p-4">
+        <h3 className="text-xl font-bold text-white mb-2">{name}</h3>
+        <p className="text-gray-400 mb-4">{description}</p>
 
-        <div className="tags">
+        <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
-            <span key={`${name}-${tag.name}`} className={`tag ${tag.color}`}>
+            <span
+              key={`${name}-${tag.name}`}
+              className={`px-2 py-1 rounded-full text-xs ${tag.color} text-white`}
+            >
               #{tag.name}
             </span>
           ))}
@@ -111,7 +114,7 @@ const ProjectCard = ({
 
 const ProjectsContainer = () => {
   return (
-    <div className="projects-container ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project, index) => (
         <ProjectCard key={`project-${index}`} {...project} />
       ))}

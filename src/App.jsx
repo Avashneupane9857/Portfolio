@@ -7,7 +7,7 @@ function App() {
     <main className="max-w-7xl mx-auto">
       <Navbar />
       <Hero />
-      <div className="w-[1150px] mx-auto ">
+      <div className=" mx-auto ">
         {" "}
         <About />
       </div>

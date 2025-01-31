@@ -165,14 +165,6 @@ export const projects = [
         name: "typescript",
         color: "green-text-gradient",
       },
-      {
-        name: "@solana/web3.js",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "@solana/wallet-adapter",
-        color: "orange-text-gradient",
-      },
     ],
     image: "/assets/geo.png",
     source_code_link: "https://github.com/Avashneupane9857/Geoland-Travels",

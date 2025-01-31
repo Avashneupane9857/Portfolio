@@ -66,7 +66,7 @@ const ProjectCard = ({
           className="w-full h-48 object-cover"
         />
 
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center space-x-4  group-hover:opacity-100 transition-opacity duration-300">
           {figma_link && (
             <button
               onClick={() => window.open(figma_link, "_blank")}

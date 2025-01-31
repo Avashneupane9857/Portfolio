@@ -81,7 +81,7 @@ function About() {
       ) : (
         <div className="relative">
           <ProjectsContainer />
-          <div className="absolute top-36 -left-32 transform -translate-y-1/2">
+          <div className="absolute top-40 -left-28 transform -translate-y-1/2">
             <MeBtn onMeClick={() => setShowProjects(false)} />
           </div>
         </div>

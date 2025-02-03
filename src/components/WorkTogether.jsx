@@ -1,18 +1,53 @@
 import React, { useState } from "react";
-import { X } from "lucide-react";
+import { AlertCircle, CheckCircle, X } from "lucide-react";
 import Button from "./Button";
+import axios from "axios";
+import { backendUrl } from "./config";
+
 export const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    console.log("Form submitted:", formData);
-    onClose();
+    try {
+      await axios.post(`${backendUrl}/contact`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      setStatus({
+        type: "success",
+        message: "Message sent successfully! We will get back to you soon.",
+      });
+
+      setFormData({ name: "", email: "", message: "" });
+      setShowSuccess(true);
+
+      // Hide success message and close modal after 3 seconds
+      setTimeout(() => {
+        setShowSuccess(false);
+        onClose();
+      }, 3000);
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -23,6 +58,20 @@ export const ContactModal = ({ isOpen, onClose }) => {
   };
 
   if (!isOpen) return null;
+
+  if (showSuccess) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div className="bg-zinc-900 rounded-lg max-w-md w-full p-8 relative text-center">
+          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-white mb-2">Thank You!</h2>
+          <p className="text-gray-300">
+            Your message has been sent successfully. We'll get back to you soon.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
@@ -93,10 +142,19 @@ export const ContactModal = ({ isOpen, onClose }) => {
 
           <button
             type="submit"
-            className="w-full py-2 px-4 hover:bg-black-100  bg-zinc-800 border border-zinc-700 text-white font-medium rounded-md transition-colors duration-200"
+            disabled={loading}
+            className="w-full py-2 px-4 hover:bg-black-100 bg-zinc-800 border border-zinc-700 text-white font-medium rounded-md transition-colors duration-200 disabled:opacity-50"
           >
-            Send Message
+            {loading ? "Sending..." : "Send Message"}
           </button>
+
+          {status.type === "error" && (
+            <Alert variant="destructive">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{status.message}</AlertDescription>
+            </Alert>
+          )}
         </form>
       </div>
     </div>

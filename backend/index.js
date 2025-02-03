@@ -17,7 +17,7 @@ app.use(express.json());
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, // true for 465, false for other ports
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
@@ -74,11 +74,11 @@ app.post("/contact", async (req, res) => {
       subject: "We received your message",
       html: `
           <div style="font-family: Arial, sans-serif; padding: 20px;">
-            <h2>Thank you for contacting us!</h2>
+            <h2>Thank you for contacting me!</h2>
             <p>Dear ${name},</p>
-            <p>We have received your message and will get back to you soon.</p>
+            <p>I have received your message and will get back to you soon.</p>
             <p>Best regards,</p>
-            <p>Your Team</p>
+            <p>Avsh</p>
           </div>
         `,
     };

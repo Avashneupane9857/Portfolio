@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth cursor-none">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avash Neupane | Full Stack & DevOps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        white: '#f0f0f0',
+                        gray: '#888888',
+                    },
+                    cursor: {
+                        none: 'none',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --cursor-size: 20px;
+        }
+
+        body {
+            background-color: #050505;
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border: 1px solid white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: height 0.2s, width 0.2s, background-color 0.2s;
+            transform: translate(-50%, -50%);
+        }
+
+        #cursor.hovered {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-color: white;
+            mix-blend-mode: exclusion;
+        }
+
+        /* Noise Overlay */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.05;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAA5OTkAAAAAAAAAAABMTExERERmZmZVNjOnAAAACHRSTlMAMwAXYHGlwqBO5wAAAAFiS0dEAIgFHUgAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABVSURBVDjLxZMxCgAgDAM1/v9DnSyouNglH7hC0jal0U0xc3H/9hH1U49sR2t18R7RWh28R7RWh2xH1E89sh2t1cV7RGt18R7RWh2yHVE/9ch2tFYX7xG7FzN5Bw2/ygAAAABJRU5ErkJggg==');
+        }
+
+        /* Typography Utils */
+        .outline-text {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+            transition: all 0.5s ease;
+        }
+
+        .group:hover .outline-text {
+            -webkit-text-stroke: 1px #fff;
+            color: #fff;
+        }
+
+        .grid-bg {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- Noise Texture -->
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference">
+        <a href="#" class="font-mono text-sm hover-target tracking-widest">[AVASH_N]</a>
+        <div class="flex gap-8">
+            <a href="#work" class="font-mono text-sm hover-target hover:line-through decoration-white">WORK</a>
+            <a href="#stack" class="font-mono text-sm hover-target hover:line-through decoration-white">STACK</a>
+            <a href="#contact" class="font-mono text-sm hover-target hover:line-through decoration-white">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center px-6 relative grid-bg">
+        <div class="max-w-7xl mx-auto w-full z-10">
+            <p class="font-mono text-gray mb-4 reveal-text block overflow-hidden">
+                <span class="block translate-y-full">FULL STACK & DEVOPS ENGINEER</span>
+            </p>
+            <h1 class="text-[12vw] leading-[0.9] font-bold tracking-tighter uppercase mix-blend-difference">
+                <div class="overflow-hidden"><span class="block translate-y-full reveal-text">Avash</span></div>
+                <div class="overflow-hidden"><span
+                        class="block translate-y-full reveal-text text-gray-500 outline-text">Neupane</span></div>
+            </h1>
+
+            <div class="mt-12 max-w-xl overflow-hidden">
+                <p class="font-sans text-xl md:text-2xl leading-relaxed text-gray-300 reveal-text translate-y-full">
+                    Architecting scalable infrastructure and building intuitive interfaces.
+                    Simplifying complexity through code.
+                </p>
+            </div>
+
+            <div class="mt-16 flex gap-6 overflow-hidden">
+                <a href="https://github.com/Avashneupane9857" target="_blank"
+                    class="hover-target border border-white/20 px-8 py-4 font-mono text-sm hover:bg-white hover:text-black transition-colors duration-300 reveal-text translate-y-full inline-block">
+                    GITHUB_Profile ->
+                </a>
+                <a href="mailto:reevasnp123@gmail.com"
+                    class="hover-target border border-white/20 px-8 py-4 font-mono text-sm hover:bg-white hover:text-black transition-colors duration-300 reveal-text translate-y-full inline-block">
+                    EMAIL_Me ->
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-6 font-mono text-xs animate-bounce">
+            (SCROLL)
+        </div>
+    </section>
+
+    <!-- Tech Stack Marquee -->
+    <section id="stack" class="py-24 border-t border-white/10 bg-black">
+        <div class="marquee-container border-y border-white/10 py-8">
+            <div class="marquee-content font-sans text-6xl md:text-8xl font-bold opacity-50 uppercase">
+                TypeScript • Go • React • AWS • Kubernetes • Docker • Terraform • Next.js • Jenkins • Express •
+                TailwindCSS • &nbsp;
+                TypeScript • Go • React • AWS • Kubernetes • Docker • Terraform • Next.js • Jenkins • Express •
+                TailwindCSS • &nbsp;
+            </div>
+        </div>
+    </section>
+
+    <!-- Selected Work / Projects -->
+    <section id="work" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-end justify-between mb-20 border-b border-white/20 pb-6">
+                <h2 class="text-4xl font-bold">SELECTED WORK</h2>
+                <span class="font-mono text-sm">[01 - 03]</span>
+            </div>
+
+            <!-- Project List -->
+            <div class="space-y-0">
+                <!-- Item 1 -->
+                <a href="https://github.com/Avashneupane9857" target="_blank"
+                    class="group block border-b border-white/10 py-12 hover-target relative transition-all duration-500 hover:pl-8">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4 z-10 relative">
+                        <h3
+                            class="text-4xl md:text-6xl font-bold group-hover:text-transparent group-hover:outline-text transition-colors">
+                            Cloud Infrastructure
+                        </h3>
+                        <div class="flex gap-4 font-mono text-xs text-gray uppercase">
+                            <span>Terraform</span>
+                            <span>AWS</span>
+                            <span>K8s</span>
+                        </div>
+                    </div>
+                    <div
+                        class="mt-4 max-w-xl text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-0 group-hover:h-auto overflow-hidden">
+                        Automated provisioning of scalable cloud environments using Infrastructure as Code principles.
+                    </div>
+                </a>
+
+                <!-- Item 2 -->
+                <a href="https://github.com/Avashneupane9857" target="_blank"
+                    class="group block border-b border-white/10 py-12 hover-target relative transition-all duration-500 hover:pl-8">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4 z-10 relative">
+                        <h3
+                            class="text-4xl md:text-6xl font-bold group-hover:text-transparent group-hover:outline-text transition-colors">
+                            Microservices API
+                        </h3>
+                        <div class="flex gap-4 font-mono text-xs text-gray uppercase">
+                            <span>Go</span>
+                            <span>Docker</span>
+                            <span>gRPC</span>
+                        </div>
+                    </div>
+                    <div
+                        class="mt-4 max-w-xl text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-0 group-hover:h-auto overflow-hidden">
+                        High-performance backend services containerized for efficiency and scalability.
+                    </div>
+                </a>
+
+                <!-- Item 3 -->
+                <a href="https://github.com/Avashneupane9857" target="_blank"
+                    class="group block border-b border-white/10 py-12 hover-target relative transition-all duration-500 hover:pl-8">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4 z-10 relative">
+                        <h3
+                            class="text-4xl md:text-6xl font-bold group-hover:text-transparent group-hover:outline-text transition-colors">
+                            Full Stack Dashboard
+                        </h3>
+                        <div class="flex gap-4 font-mono text-xs text-gray uppercase">
+                            <span>React</span>
+                            <span>Next.js</span>
+                            <span>Tailwind</span>
+                        </div>
+                    </div>
+                    <div
+                        class="mt-4 max-w-xl text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-0 group-hover:h-auto overflow-hidden">
+                        Interactive data visualization platform with modern UI/UX patterns.
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terminal / About Section -->
+    <section class="py-20 px-6 bg-white/5">
+        <div class="max-w-4xl mx-auto font-mono text-sm md:text-base">
+            <div class="bg-black border border-white/20 rounded-lg p-6 shadow-2xl">
+                <div class="flex gap-2 mb-6 border-b border-white/10 pb-4">
+                    <div class="w-3 h-3 rounded-full bg-white/20"></div>
+                    <div class="w-3 h-3 rounded-full bg-white/20"></div>
+                    <div class="w-3 h-3 rounded-full bg-white/20"></div>
+                </div>
+                <div class="space-y-4 text-gray-300">
+                    <p><span class="text-white">➜</span> <span class="text-white">whoami</span></p>
+                    <p class="pl-4">
+                        "Avash Neupane" <br>
+                        Based in the matrix. Passionate about bridging the gap between development and operations.
+                    </p>
+
+                    <p><span class="text-white">➜</span> <span class="text-white">ls skills/devops</span></p>
+                    <p class="pl-4 text-white">
+                        [ 'Docker', 'Kubernetes', 'Jenkins', 'Terraform', 'AWS_EC2', 'AWS_S3', 'CI/CD' ]
+                    </p>
+
+                    <p><span class="text-white">➜</span> <span class="text-white">ls skills/web</span></p>
+                    <p class="pl-4 text-white">
+                        [ 'TypeScript', 'React.js', 'Next.js', 'Express', 'GoLang' ]
+                    </p>
+
+                    <p><span class="text-white animate-pulse">➜</span> <span class="typing-effect">_</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <section id="contact" class="h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden">
+        <div class="absolute inset-0 grid-bg opacity-20"></div>
+
+        <p class="font-mono text-sm mb-8 uppercase tracking-widest">Start a project</p>
+
+        <a href="mailto:reevasnp123@gmail.com"
+            class="hover-target text-[8vw] md:text-[6vw] font-bold leading-none hover:scale-110 transition-transform duration-500 text-center mix-blend-difference">
+            reevasnp123<br>@gmail.com
+        </a>
+
+        <div class="absolute bottom-10 w-full flex justify-between px-6 font-mono text-xs uppercase text-gray-500">
+            <span>© 2024 Avash Neupane</span>
+            <span>Github: @Avashneupane9857</span>
+        </div>
+    </section>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        const hoverTargets = document.querySelectorAll('.hover-target');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        hoverTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => {
+                cursor.classList.add('hovered');
+            });
+            target.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hovered');
+            });
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Reveal
+        gsap.to('.reveal-text', {
+            y: 0,
+            duration: 1.5,
+            stagger: 0.2,
+            ease: 'power4.out',
+            delay: 0.2
+        });
+
+        // Marquee speed adjustment on scroll (optional subtle effect)
+        ScrollTrigger.create({
+            trigger: "#stack",
+            onUpdate: (self) => {
+                const velocity = Math.abs(self.getVelocity());
+                // Logic could be added here to speed up marquee on scroll
+            }
+        });
+
+        // Fade in elements on scroll
+        gsap.utils.toArray('section').forEach(section => {
+            gsap.fromTo(section,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                    }
+                }
+            );
+        });
+
+        // Terminal Typing Effect
+        const typingCursor = document.querySelector('.typing-effect');
+        setInterval(() => {
+            typingCursor.classList.toggle('opacity-0');
+        }, 500);
+
+    </script>
+</body>
+
+</html>

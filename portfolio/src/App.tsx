@@ -1,68 +1,71 @@
-import React, { useEffect, useRef, useLayoutEffect, useState } from "react";
-import { ArrowRight, Terminal, Github, Mail } from "lucide-react";
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Github, Mail } from 'lucide-react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-// NOTE: In a real project, you would likely install gsap via npm: npm install gsap
-// For this preview, we assume gsap is available globally or included in the environment.
-// If running locally, make sure to install gsap and import it:
-// import gsap from 'gsap';
-// import ScrollTrigger from 'gsap/ScrollTrigger';
-
-/* --- 1. UTILITIES & ASSETS --- */
-
-// Noise texture base64
-const noiseBg =
-  "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAA5OTkAAAAAAAAAAABMTExERERmZmZVNjOnAAAACHRSTlMAMwAXYHGlwqBO5wAAAAFiS0dEAIgFHUgAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABVSURBVDjLxZMxCgAgDAM1/v9DnSyouNglH7hC0jal0U0xc3H/9hH1U49sR2t18R7RWh28R7RWh2xH1E89sh2t1cV7RGt18R7RWh2yHVE/9ch2tFYX7xG7FzN5Bw2/ygAAAABJRU5ErkJggg==')";
-
-// GSAP Registration (Mocking for environments where it might auto-load, but explicitly calling if available)
-if (typeof window !== "undefined" && window.gsap && window.ScrollTrigger) {
-  window.gsap.registerPlugin(window.ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
 }
 
-/* --- 2. COMPONENTS --- */
+const noiseBg =
+  "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAA5OTkAAAAAAAAAAABMTExERERmZmZVNjOnAAAACHRSTlMAMwAXYHGlwqBO5wAAAAFiS0dEAIgFHUgAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABVSURBVDjLxZMxCgAgDAM1/v9DnSyouNglH7hC0jal0U0xc3H/9hH1U49sR2t18R7RWh28R7RWh2xH1E89sh2t1cV7RGt18R7RWh2yHVE/9ch2tFYX7xG7FzN5Bw2/ygAAAABJRU5ErkJggg==')"
 
-const CustomCursor = () => {
-  const cursorRef = useRef(null);
+interface ProjectItemProps {
+  title: string
+  stack: string[]
+  desc: string
+  link: string
+}
+
+function CustomCursor() {
+  const cursorRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    if (!cursor) return;
+    if (typeof window === 'undefined' || !cursorRef.current) return
 
-    const moveCursor = (e) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-    };
+    const cursor = cursorRef.current
 
-    const hoverEffect = () =>
-      cursor.classList.add("scale-[4]", "bg-white", "mix-blend-exclusion");
-    const removeHoverEffect = () =>
-      cursor.classList.remove("scale-[4]", "bg-white", "mix-blend-exclusion");
+    const moveCursor = (event: MouseEvent) => {
+      cursor.style.left = `${event.clientX}px`
+      cursor.style.top = `${event.clientY}px`
+    }
 
-    window.addEventListener("mousemove", moveCursor);
+    const hoverTargets = document.querySelectorAll<HTMLElement>(
+      'a, button, .hover-target',
+    )
 
-    const hoverTargets = document.querySelectorAll("a, button, .hover-target");
-    hoverTargets.forEach((el) => {
-      el.addEventListener("mouseenter", hoverEffect);
-      el.addEventListener("mouseleave", removeHoverEffect);
-    });
+    const hoverEffect = () => {
+      cursor.classList.add('scale-[4]', 'bg-white', 'mix-blend-exclusion')
+    }
+
+    const removeHoverEffect = () => {
+      cursor.classList.remove('scale-[4]', 'bg-white', 'mix-blend-exclusion')
+    }
+
+    window.addEventListener('mousemove', moveCursor)
+    hoverTargets.forEach((element) => {
+      element.addEventListener('mouseenter', hoverEffect)
+      element.addEventListener('mouseleave', removeHoverEffect)
+    })
 
     return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      hoverTargets.forEach((el) => {
-        el.removeEventListener("mouseenter", hoverEffect);
-        el.removeEventListener("mouseleave", removeHoverEffect);
-      });
-    };
-  }, []);
+      window.removeEventListener('mousemove', moveCursor)
+      hoverTargets.forEach((element) => {
+        element.removeEventListener('mouseenter', hoverEffect)
+        element.removeEventListener('mouseleave', removeHoverEffect)
+      })
+    }
+  }, [])
 
   return (
     <div
       ref={cursorRef}
       className="fixed top-0 left-0 w-5 h-5 border border-white rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-200 ease-out mix-blend-difference"
     />
-  );
-};
+  )
+}
 
-const Navbar = () => {
+function Navbar() {
   return (
     <nav className="fixed w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference text-white">
       <a href="#" className="font-mono text-sm hover-target tracking-widest">
@@ -89,38 +92,39 @@ const Navbar = () => {
         </a>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-const Hero = () => {
-  const containerRef = useRef(null);
+function Hero() {
+  const containerRef = useRef<HTMLElement | null>(null)
 
   useLayoutEffect(() => {
-    const ctx = window.gsap.context(() => {
-      window.gsap.to(".reveal-text", {
+    if (typeof window === 'undefined' || !containerRef.current) return
+
+    const ctx = gsap.context(() => {
+      gsap.to('.reveal-text', {
         y: 0,
         duration: 1.5,
         stagger: 0.2,
-        ease: "power4.out",
+        ease: 'power4.out',
         delay: 0.2,
-      });
-    }, containerRef);
+      })
+    }, containerRef)
 
-    return () => ctx.revert();
-  }, []);
+    return () => ctx.revert()
+  }, [])
 
   return (
     <section
       ref={containerRef}
       className="min-h-screen flex flex-col justify-center px-6 relative bg-[#050505]"
     >
-      {/* Grid Background */}
       <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
+            'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
         }}
       ></div>
 
@@ -138,7 +142,7 @@ const Hero = () => {
           <div className="overflow-hidden">
             <span
               className="block translate-y-full reveal-text text-transparent"
-              style={{ WebkitTextStroke: "1px rgba(255,255,255,0.3)" }}
+              style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}
             >
               Neupane
             </span>
@@ -170,53 +174,36 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
       <div className="absolute bottom-10 left-6 font-mono text-xs animate-bounce text-gray-500">
         (SCROLL)
       </div>
     </section>
-  );
-};
+  )
+}
 
-const TechStack = () => {
-  const stack =
-    "TypeScript • Go • React • AWS • Kubernetes • Docker • Terraform • Next.js • Jenkins • Express • TailwindCSS • ";
+function TechStack() {
+  const stackLabel =
+    'TypeScript • Go • React • AWS • Kubernetes • Docker • Terraform • Next.js • Jenkins • Express • TailwindCSS • '
 
   return (
-    <section
-      id="stack"
-      className="py-24 border-t border-white/10 bg-black overflow-hidden"
-    >
+    <section id="stack" className="py-24 border-t border-white/10 bg-black overflow-hidden">
       <div className="border-y border-white/10 py-8 whitespace-nowrap flex">
-        <div className="animate-marquee inline-block">
+        <div className="marquee inline-block">
           <span className="font-sans text-6xl md:text-8xl font-bold text-white/50 uppercase mr-12">
-            {stack}
+            {stackLabel}
           </span>
         </div>
-        <div className="animate-marquee inline-block">
+        <div className="marquee inline-block" aria-hidden="true">
           <span className="font-sans text-6xl md:text-8xl font-bold text-white/50 uppercase mr-12">
-            {stack}
+            {stackLabel}
           </span>
         </div>
       </div>
-      <style jsx>{`
-        .animate-marquee {
-          animation: marquee 20s linear infinite;
-        }
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-100%);
-          }
-        }
-      `}</style>
     </section>
-  );
-};
+  )
+}
 
-const ProjectItem = ({ title, stack, desc, link }) => {
+function ProjectItem({ title, stack, desc, link }: ProjectItemProps) {
   return (
     <a
       href={link}
@@ -227,19 +214,19 @@ const ProjectItem = ({ title, stack, desc, link }) => {
       <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 z-10 relative">
         <h3
           className="text-4xl md:text-6xl font-bold text-white group-hover:text-transparent transition-colors"
-          style={{ WebkitTextStroke: "1px transparent" }}
+          style={{ WebkitTextStroke: '1px transparent' }}
         >
           <span className="group-hover:hidden">{title}</span>
           <span
             className="hidden group-hover:block"
-            style={{ WebkitTextStroke: "1px white", color: "transparent" }}
+            style={{ WebkitTextStroke: '1px white', color: 'transparent' }}
           >
             {title}
           </span>
         </h3>
         <div className="flex gap-4 font-mono text-xs text-gray-500 uppercase">
-          {stack.map((tech, i) => (
-            <span key={i}>{tech}</span>
+          {stack.map((tech) => (
+            <span key={`${title}-${tech}`}>{tech}</span>
           ))}
         </div>
       </div>
@@ -247,16 +234,17 @@ const ProjectItem = ({ title, stack, desc, link }) => {
         {desc}
       </div>
     </a>
-  );
-};
+  )
+}
 
-const Work = () => {
-  const containerRef = useRef(null);
+function Work() {
+  const containerRef = useRef<HTMLDivElement | null>(null)
 
   useLayoutEffect(() => {
-    if (!window.gsap || !window.ScrollTrigger) return;
-    const ctx = window.gsap.context(() => {
-      window.gsap.fromTo(
+    if (typeof window === 'undefined' || !containerRef.current) return
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
         containerRef.current,
         { opacity: 0, y: 50 },
         {
@@ -265,34 +253,35 @@ const Work = () => {
           duration: 1,
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 80%",
+            start: 'top 80%',
           },
-        }
-      );
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
+        },
+      )
+    }, containerRef)
 
-  const projects = [
+    return () => ctx.revert()
+  }, [])
+
+  const projects: ProjectItemProps[] = [
     {
-      title: "Cloud Infrastructure",
-      stack: ["Terraform", "AWS", "K8s"],
-      desc: "Automated provisioning of scalable cloud environments using Infrastructure as Code principles.",
-      link: "https://github.com/Avashneupane9857",
+      title: 'Cloud Infrastructure',
+      stack: ['Terraform', 'AWS', 'K8s'],
+      desc: 'Automated provisioning of scalable cloud environments using Infrastructure as Code principles.',
+      link: 'https://github.com/Avashneupane9857',
     },
     {
-      title: "Microservices API",
-      stack: ["Go", "Docker", "gRPC"],
-      desc: "High-performance backend services containerized for efficiency and scalability.",
-      link: "https://github.com/Avashneupane9857",
+      title: 'Microservices API',
+      stack: ['Go', 'Docker', 'gRPC'],
+      desc: 'High-performance backend services containerized for efficiency and scalability.',
+      link: 'https://github.com/Avashneupane9857',
     },
     {
-      title: "Full Stack Dashboard",
-      stack: ["React", "Next.js", "Tailwind"],
-      desc: "Interactive data visualization platform with modern UI/UX patterns.",
-      link: "https://github.com/Avashneupane9857",
+      title: 'Full Stack Dashboard',
+      stack: ['React', 'Next.js', 'Tailwind'],
+      desc: 'Interactive data visualization platform with modern UI/UX patterns.',
+      link: 'https://github.com/Avashneupane9857',
     },
-  ];
+  ]
 
   return (
     <section id="work" className="py-32 px-6 bg-[#050505]">
@@ -302,22 +291,23 @@ const Work = () => {
           <span className="font-mono text-sm text-gray-500">[01 - 03]</span>
         </div>
         <div className="space-y-0">
-          {projects.map((p, i) => (
-            <ProjectItem key={i} {...p} />
+          {projects.map((project) => (
+            <ProjectItem key={project.title} {...project} />
           ))}
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-const TerminalSection = () => {
-  const [cursorVisible, setCursorVisible] = useState(true);
+function TerminalSection() {
+  const [cursorVisible, setCursorVisible] = useState(true)
 
   useEffect(() => {
-    const interval = setInterval(() => setCursorVisible((v) => !v), 500);
-    return () => clearInterval(interval);
-  }, []);
+    if (typeof window === 'undefined') return
+    const interval = window.setInterval(() => setCursorVisible((visible) => !visible), 500)
+    return () => window.clearInterval(interval)
+  }, [])
 
   return (
     <section className="py-20 px-6 bg-white/5">
@@ -330,50 +320,37 @@ const TerminalSection = () => {
           </div>
           <div className="space-y-4 text-gray-300">
             <p>
-              <span className="text-white">➜</span>{" "}
-              <span className="text-white">whoami</span>
+              <span className="text-white">➜</span> <span className="text-white">whoami</span>
             </p>
             <p className="pl-4">
               "Avash Neupane" <br />
-              Based in the matrix. Passionate about bridging the gap between
-              development and operations.
+              Based in the matrix. Passionate about bridging the gap between development and operations.
             </p>
 
             <p>
-              <span className="text-white">➜</span>{" "}
-              <span className="text-white">ls skills/devops</span>
+              <span className="text-white">➜</span> <span className="text-white">ls skills/devops</span>
             </p>
             <p className="pl-4 text-white">
-              [ 'Docker', 'Kubernetes', 'Jenkins', 'Terraform', 'AWS_EC2',
-              'AWS_S3', 'CI/CD' ]
+              [ 'Docker', 'Kubernetes', 'Jenkins', 'Terraform', 'AWS_EC2', 'AWS_S3', 'CI/CD' ]
             </p>
 
             <p>
-              <span className="text-white">➜</span>{" "}
-              <span className="text-white">ls skills/web</span>
+              <span className="text-white">➜</span> <span className="text-white">ls skills/web</span>
             </p>
-            <p className="pl-4 text-white">
-              [ 'TypeScript', 'React.js', 'Next.js', 'Express', 'GoLang' ]
-            </p>
+            <p className="pl-4 text-white">[ 'TypeScript', 'React.js', 'Next.js', 'Express', 'GoLang' ]</p>
 
             <p>
               <span className="text-white">➜</span>
-              <span
-                className={`ml-2 ${
-                  cursorVisible ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                _
-              </span>
+              <span className={`ml-2 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>
             </p>
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-const Contact = () => {
+function Contact() {
   return (
     <section
       id="contact"
@@ -383,14 +360,12 @@ const Contact = () => {
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
+            'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
         }}
       ></div>
 
-      <p className="font-mono text-sm mb-8 uppercase tracking-widest text-gray-400 z-10">
-        Start a project
-      </p>
+      <p className="font-mono text-sm mb-8 uppercase tracking-widest text-gray-400 z-10">Start a project</p>
 
       <a
         href="mailto:reevasnp123@gmail.com"
@@ -406,20 +381,17 @@ const Contact = () => {
         <span>Github: @Avashneupane9857</span>
       </div>
     </section>
-  );
-};
+  )
+}
 
-/* --- 3. MAIN APP COMPONENT --- */
-
-const App = () => {
-  // Ensure we start at top on load
+function App() {
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (typeof window === 'undefined') return
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="cursor-none bg-[#050505] min-h-screen selection:bg-white selection:text-black">
-      {/* Noise Overlay */}
       <div
         className="fixed top-0 left-0 w-full h-full pointer-events-none z-50 opacity-[0.05]"
         style={{ backgroundImage: noiseBg }}
@@ -437,7 +409,8 @@ const App = () => {
 
       <Contact />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
+

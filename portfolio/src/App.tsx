@@ -318,6 +318,8 @@ function Work() {
     },
   ]
 
+
+
   return (
     <section id="experience" className="py-32 px-6 bg-[#050505]">
       <div ref={containerRef} className="max-w-7xl mx-auto">

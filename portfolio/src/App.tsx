@@ -15,7 +15,8 @@ interface ProjectItemProps {
   title: string
   stack: string[]
   desc: string
-  link: string
+  /** If set, shown as the only navigable link inside the expanded description */
+  externalHref?: string
 }
 
 function CustomCursor() {
@@ -186,9 +187,9 @@ function Hero() {
         </h1>
 
         <div className="mt-12 max-w-3xl overflow-hidden relative">
-          <p className="font-sans text-xl md:text-2xl leading-relaxed text-gray-300 relative">
+          <p className="font-mono text-lg   md:text-xl leading-relaxed text-gray-300 relative">
             <span className="opacity-0">
-              Detail-oriented software engineer with full-stack experience, strong communication skills, and a proven ability to understand requirements and deliver reliable solutions through structured problem-solving._
+              Detail-oriented software engineer with full-stack experience, strong communication skills, and a proven ability to understand requirements and deliver reliable solutions through structured problem-solving.
             </span>
             <span className="absolute top-0 left-0 w-full h-full">
               <span className="text-typewriter"></span>
@@ -238,22 +239,26 @@ function TechStack() {
   )
 }
 
-function ProjectItem({ title, stack, desc, link }: ProjectItemProps) {
-  return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group block border-b border-white/10 py-12 hover-target relative transition-all duration-500 hover:pl-8"
-    >
+function ProjectItem({ title, stack, desc, externalHref }: ProjectItemProps) {
+  const [expanded, setExpanded] = useState(false)
+
+  const rowClass =
+    'group block border-b border-white/10 py-12 hover-target relative transition-all duration-500 hover:pl-8'
+
+  const stopLinkToggle = (e: React.MouseEvent | React.KeyboardEvent) => {
+    e.stopPropagation()
+  }
+
+  const content = (
+    <>
       <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 z-10 relative">
         <h3
-          className="text-4xl md:text-6xl font-bold text-white group-hover:text-transparent transition-colors"
+          className="text-4xl md:text-6xl font-bold text-white group-hover:text-transparent transition-colors group-data-[expanded=true]:max-md:text-transparent"
           style={{ WebkitTextStroke: '1px transparent' }}
         >
-          <span className="group-hover:hidden">{title}</span>
+          <span className="group-hover:hidden group-data-[expanded=true]:max-md:hidden">{title}</span>
           <span
-            className="hidden group-hover:block"
+            className="hidden group-hover:block group-data-[expanded=true]:max-md:block"
             style={{ WebkitTextStroke: '1px white', color: 'transparent' }}
           >
             {title}
@@ -265,10 +270,45 @@ function ProjectItem({ title, stack, desc, link }: ProjectItemProps) {
           ))}
         </div>
       </div>
-      <div className="mt-4 max-w-xl text-gray-400 opacity-0 group-hover:opacity-100 transition-all duration-500 h-0 group-hover:h-auto overflow-hidden whitespace-pre-wrap">
+      <div className="mt-4 max-w-xl text-gray-400 transition-all duration-500 overflow-hidden whitespace-pre-wrap h-0 opacity-0 group-hover:opacity-100 group-hover:h-auto group-data-[expanded=true]:max-md:opacity-100 group-data-[expanded=true]:max-md:h-auto">
         {desc}
+        {externalHref ? (
+          <>
+            {'\n\nCheck-Out: '}
+            <a
+              href={externalHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white underline underline-offset-2 hover:text-gray-200 hover-target"
+              onClick={stopLinkToggle}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') stopLinkToggle(e)
+              }}
+            >
+              {externalHref}
+            </a>
+          </>
+        ) : null}
       </div>
-    </a>
+    </>
+  )
+
+  return (
+    <div
+      tabIndex={0}
+      data-expanded={expanded}
+      aria-expanded={expanded}
+      className={`${rowClass} cursor-pointer`}
+      onClick={() => setExpanded((v) => !v)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          setExpanded((v) => !v)
+        }
+      }}
+    >
+      {content}
+    </div>
   )
 }
 
@@ -302,19 +342,17 @@ function Work() {
       title: 'Fullstack Developer, SajiloDev',
       stack: ['Oct 2023 — Jun 2025'],
       desc: '• Built and deployed production-ready applications using React, Next.js, Express\n• Improved team efficiency through automation and structured development workflows.\n• Collaborated with clients and teams to gather requirements and deliver reliable solutions.',
-      link: '#',
     },
     {
       title: 'Operations Lead, 100xNepal',
       stack: ['Aug 2025 — Jan 2026'],
       desc: '• Managed a national-level 24-hour hackathon end-to-end, handling planning, sponsorships, logistics, and coordination.\n• Built partnerships with developers, institutions, and industry stakeholders to expand community reach.\n• Contributed to product strategy and technical decision-making for upcoming projects.',
-      link: '#',
     },
     {
       title: 'Co-Founder, Poultry360',
       stack: ['Sept 2025 — Present'],
-      desc: 'Building a unified platform to digitize and manage Nepal’s poultry ecosystem, connecting Layer & Broiler Farms, Hatcheries, Feed dealers, Feed Mills Company, and Veterinarians.\n\nCheck-Out: https://www.poultry360.app',
-      link: 'https://www.poultry360.app',
+      desc: 'Building a unified platform to digitize and manage Nepal’s poultry ecosystem, connecting Layer & Broiler Farms, Hatcheries, Feed dealers, Feed Mills Company, and Veterinarians.',
+      externalHref: 'https://www.poultry360.app',
     },
   ]
 

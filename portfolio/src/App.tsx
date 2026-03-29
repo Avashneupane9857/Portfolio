@@ -75,16 +75,16 @@ function Navbar() {
         </a>
         <div className="flex gap-4 md:gap-8">
           <a
-            href="#work"
+            href="#experience"
             className="font-mono text-xs md:text-sm hover-target hover:line-through decoration-white"
           >
-            WORK
+            EXPERIENCE
           </a>
           <a
-            href="#stack"
+            href="#skills"
             className="font-mono text-xs md:text-sm hover-target hover:line-through decoration-white"
           >
-            STACK
+            SKILLS
           </a>
           <a
             href="#contact"
@@ -218,7 +218,7 @@ function Hero() {
 
 function TechStack() {
   const stackLabel =
-    'TypeScript • Go • React • AWS • Kubernetes • Docker • Terraform • Next.js • Jenkins • Express • TailwindCSS • '
+    ' Building meaningful solutions that make an impact • '
 
   return (
     <section id="stack" className="py-24 border-t border-white/10 bg-black overflow-hidden">
@@ -265,7 +265,7 @@ function ProjectItem({ title, stack, desc, link }: ProjectItemProps) {
           ))}
         </div>
       </div>
-      <div className="mt-4 max-w-xl text-gray-400 opacity-0 group-hover:opacity-100 transition-all duration-500 h-0 group-hover:h-auto overflow-hidden">
+      <div className="mt-4 max-w-xl text-gray-400 opacity-0 group-hover:opacity-100 transition-all duration-500 h-0 group-hover:h-auto overflow-hidden whitespace-pre-wrap">
         {desc}
       </div>
     </a>
@@ -299,30 +299,30 @@ function Work() {
 
   const projects: ProjectItemProps[] = [
     {
-      title: 'Cloud Infrastructure',
-      stack: ['Terraform', 'AWS', 'K8s'],
-      desc: 'Automated provisioning of scalable cloud environments using Infrastructure as Code principles.',
-      link: 'https://github.com/Avashneupane9857',
+      title: 'Fullstack Developer, SajiloDev',
+      stack: ['Oct 2023 — Jun 2025'],
+      desc: '• Built and deployed production-ready applications using React, Next.js, Express\n• Improved team efficiency through automation and structured development workflows.\n• Collaborated with clients and teams to gather requirements and deliver reliable solutions.',
+      link: '#',
     },
     {
-      title: 'Microservices API',
-      stack: ['Go', 'Docker', 'gRPC'],
-      desc: 'High-performance backend services containerized for efficiency and scalability.',
-      link: 'https://github.com/Avashneupane9857',
+      title: 'Operations Lead, 100xNepal',
+      stack: ['Aug 2025 — Jan 2026'],
+      desc: '• Managed a national-level 24-hour hackathon end-to-end, handling planning, sponsorships, logistics, and coordination.\n• Built partnerships with developers, institutions, and industry stakeholders to expand community reach.\n• Contributed to product strategy and technical decision-making for upcoming projects.',
+      link: '#',
     },
     {
-      title: 'Full Stack Dashboard',
-      stack: ['React', 'Next.js', 'Tailwind'],
-      desc: 'Interactive data visualization platform with modern UI/UX patterns.',
-      link: 'https://github.com/Avashneupane9857',
+      title: 'Co-Founder, Poultry360',
+      stack: ['Sept 2025 — Present'],
+      desc: 'Building a unified platform to digitize and manage Nepal’s poultry ecosystem, connecting Layer & Broiler Farms, Hatcheries, Feed dealers, Feed Mills Company, and Veterinarians.\n\nCheck-Out: https://www.poultry360.app',
+      link: 'https://www.poultry360.app',
     },
   ]
 
   return (
-    <section id="work" className="py-32 px-6 bg-[#050505]">
+    <section id="experience" className="py-32 px-6 bg-[#050505]">
       <div ref={containerRef} className="max-w-7xl mx-auto">
         <div className="flex items-end justify-between mb-20 border-b border-white/20 pb-6">
-          <h2 className="text-4xl font-bold text-white">SELECTED WORK</h2>
+          <h2 className="text-4xl font-bold text-white">EXPERIENCE</h2>
           <span className="font-mono text-sm text-gray-500">[01 - 03]</span>
         </div>
         <div className="space-y-0">
@@ -345,7 +345,7 @@ function TerminalSection() {
   }, [])
 
   return (
-    <section className="py-20 px-6 bg-white/5">
+    <section id="skills" className="py-20 px-6 bg-white/5">
       <div className="max-w-4xl mx-auto font-mono text-sm md:text-base">
         <div className="bg-black border border-white/20 rounded-lg p-6 shadow-2xl">
           <div className="flex gap-2 mb-6 border-b border-white/10 pb-4">
@@ -373,6 +373,13 @@ function TerminalSection() {
               <span className="text-white">➜</span> <span className="text-white">ls skills/web</span>
             </p>
             <p className="pl-4 text-white">[ 'TypeScript', 'React.js', 'Next.js', 'Express', 'GoLang' ]</p>
+
+            <p>
+              <span className="text-white">➜</span> <span className="text-white">ls skills/business</span>
+            </p>
+            <p className="pl-4 text-white">
+              [ 'Operations_Management', 'Sales_Strategy', 'Client_Relationships', 'Business_Development' ]
+            </p>
 
             <p>
               <span className="text-white">➜</span>

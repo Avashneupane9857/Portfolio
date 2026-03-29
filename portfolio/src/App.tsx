@@ -1,10 +1,11 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Github, Mail } from 'lucide-react'
+import { Github } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { TextPlugin } from 'gsap/TextPlugin'
 
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger, TextPlugin)
 }
 
 const noiseBg =
@@ -67,29 +68,31 @@ function CustomCursor() {
 
 function Navbar() {
   return (
-    <nav className="fixed w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference text-white">
-      <a href="#" className="font-mono text-sm hover-target tracking-widest">
-        [AVASH_N]
-      </a>
-      <div className="flex gap-4 md:gap-8">
-        <a
-          href="#work"
-          className="font-mono text-xs md:text-sm hover-target hover:line-through decoration-white"
-        >
-          WORK
+    <nav className="fixed w-full z-40 px-6 py-6 mix-blend-difference text-white">
+      <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
+        <a href="#" className="font-mono text-sm hover-target tracking-widest">
+          [AVASH_N]
         </a>
-        <a
-          href="#stack"
-          className="font-mono text-xs md:text-sm hover-target hover:line-through decoration-white"
-        >
-          STACK
-        </a>
-        <a
-          href="#contact"
-          className="font-mono text-xs md:text-sm hover-target hover:line-through decoration-white"
-        >
-          CONTACT
-        </a>
+        <div className="flex gap-4 md:gap-8">
+          <a
+            href="#work"
+            className="font-mono text-xs md:text-sm hover-target hover:line-through decoration-white"
+          >
+            WORK
+          </a>
+          <a
+            href="#stack"
+            className="font-mono text-xs md:text-sm hover-target hover:line-through decoration-white"
+          >
+            STACK
+          </a>
+          <a
+            href="#contact"
+            className="font-mono text-xs md:text-sm hover-target hover:line-through decoration-white"
+          >
+            CONTACT
+          </a>
+        </div>
       </div>
     </nav>
   )
@@ -108,6 +111,21 @@ function Hero() {
         stagger: 0.2,
         ease: 'power4.out',
         delay: 0.2,
+      })
+
+      gsap.to('.text-typewriter', {
+        text: "Detail-oriented software engineer with full-stack experience, strong communication skills, and a proven ability to understand requirements and deliver reliable solutions through structured problem-solving.",
+        duration: 3,
+        delay: 2.5,
+        ease: 'none'
+      })
+
+      gsap.to('.cursor-blink', {
+        opacity: 0,
+        repeat: -1,
+        yoyo: true,
+        duration: 0.4,
+        ease: 'power2.inOut',
       })
     }, containerRef)
 
@@ -129,10 +147,28 @@ function Hero() {
       ></div>
 
       <div className="max-w-7xl mx-auto w-full z-10 text-[#f0f0f0]">
-        <div className="overflow-hidden mb-4">
-          <p className="font-mono text-gray-500 reveal-text translate-y-full">
-            FULL STACK & DEVOPS ENGINEER
-          </p>
+        <div className="mb-4 flex flex-wrap items-center gap-3 font-mono text-gray-500">
+          <div className="overflow-hidden">
+            <span className="reveal-text translate-y-full inline-block">UI/UX</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="reveal-text translate-y-full inline-block">-&gt;</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="reveal-text translate-y-full inline-block">Full Stack</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="reveal-text translate-y-full inline-block">-&gt;</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="reveal-text translate-y-full inline-block">DevOps</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="reveal-text translate-y-full inline-block">-&gt;</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="reveal-text translate-y-full inline-block">?</span>
+          </div>
         </div>
 
         <h1 className="text-[12vw] leading-[0.9] font-bold tracking-tighter uppercase mix-blend-difference">
@@ -149,10 +185,15 @@ function Hero() {
           </div>
         </h1>
 
-        <div className="mt-12 max-w-xl overflow-hidden">
-          <p className="font-sans text-xl md:text-2xl leading-relaxed text-gray-300 reveal-text translate-y-full">
-            Architecting scalable infrastructure and building intuitive
-            interfaces. Simplifying complexity through code.
+        <div className="mt-12 max-w-3xl overflow-hidden relative">
+          <p className="font-sans text-xl md:text-2xl leading-relaxed text-gray-300 relative">
+            <span className="opacity-0">
+              Detail-oriented software engineer with full-stack experience, strong communication skills, and a proven ability to understand requirements and deliver reliable solutions through structured problem-solving._
+            </span>
+            <span className="absolute top-0 left-0 w-full h-full">
+              <span className="text-typewriter"></span>
+              <span className="cursor-blink font-bold ml-1 text-white">_</span>
+            </span>
           </p>
         </div>
 
@@ -164,12 +205,6 @@ function Hero() {
             className="hover-target border border-white/20 px-8 py-4 font-mono text-sm hover:bg-white hover:text-black transition-colors duration-300 reveal-text translate-y-full inline-flex items-center gap-2"
           >
             <Github size={16} /> GITHUB_Profile
-          </a>
-          <a
-            href="mailto:reevasnp123@gmail.com"
-            className="hover-target border border-white/20 px-8 py-4 font-mono text-sm hover:bg-white hover:text-black transition-colors duration-300 reveal-text translate-y-full inline-flex items-center gap-2"
-          >
-            <Mail size={16} /> EMAIL_Me
           </a>
         </div>
       </div>
@@ -365,7 +400,7 @@ function Contact() {
         }}
       ></div>
 
-      <p className="font-mono text-sm mb-8 uppercase tracking-widest text-gray-400 z-10">Start a project</p>
+      <p className="font-mono text-sm mb-8 uppercase tracking-widest text-gray-400 z-10">REACH OUT TO ME </p>
 
       <a
         href="mailto:reevasnp123@gmail.com"

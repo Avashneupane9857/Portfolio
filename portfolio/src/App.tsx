@@ -148,30 +148,6 @@ function Hero() {
       ></div>
 
       <div className="max-w-7xl mx-auto w-full z-10 text-[#f0f0f0]">
-        <div className="mb-4 flex flex-wrap items-center gap-3 font-mono text-gray-500">
-          <div className="overflow-hidden">
-            <span className="reveal-text translate-y-full inline-block">UI/UX</span>
-          </div>
-          <div className="overflow-hidden">
-            <span className="reveal-text translate-y-full inline-block">-&gt;</span>
-          </div>
-          <div className="overflow-hidden">
-            <span className="reveal-text translate-y-full inline-block">Full Stack</span>
-          </div>
-          <div className="overflow-hidden">
-            <span className="reveal-text translate-y-full inline-block">-&gt;</span>
-          </div>
-          <div className="overflow-hidden">
-            <span className="reveal-text translate-y-full inline-block">DevOps</span>
-          </div>
-          <div className="overflow-hidden">
-            <span className="reveal-text translate-y-full inline-block">-&gt;</span>
-          </div>
-          <div className="overflow-hidden">
-            <span className="reveal-text translate-y-full inline-block">?</span>
-          </div>
-        </div>
-
         <h1 className="text-[12vw] leading-[0.9] font-bold tracking-tighter uppercase mix-blend-difference">
           <div className="overflow-hidden">
             <span className="block translate-y-full reveal-text">Avash</span>
@@ -495,4 +471,3 @@ function App() {
 }
 
 export default App
-

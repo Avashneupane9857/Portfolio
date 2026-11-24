@@ -395,7 +395,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <p className={`mt-14 text-sm ${muted}`}>© {new Date().getFullYear()} Avash Neupane.</p>
+        <p className={`mt-14 text-sm ${muted}`}>Made with love by Avash</p>
       </div>
     </footer>
   )
